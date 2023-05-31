@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h3>根据偏移量固定元素</h3>
+        <label>输入偏移量:<input type="text" v-model.number.lazy="valueA"></label>
+        <label>输入偏移方向:<input type="text" v-model.lazy="direction"></label>
+        <p v-move:[direction]='valueA'>我是负责显示效果的对象</p>
+    </div>
+    
+    <script>
+new Vue({
+    el:'#root',
+    data:{
+        valueA:100,
+        direction:'right'
+
+    },
+
+    directives:{
+        move(el,binding){
+            el.style.position='fixed'
+            el.style[binding.arg]=binding.value+'px'
+        //    console.log(binding)  
+
+        }
+    }
+
+
+})
+
+
+    </script>
+</body>
+</html>

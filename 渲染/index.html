@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表渲染</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <h3>数组对象遍历</h3>
+        <ul>
+            <li v-for="(shopping,index) in shoppings">
+                {{index+3}}-{{shopping.bookName}}-{{shopping.issn}}-{{shopping.author}}
+            </li>
+
+        </ul>
+        <h3>数字遍历</h3>
+        <span v-for="count in 20">{{count}} </span>
+        <h3>对象的属性遍历</h3>
+        <ul>
+            <li v-for="(value,key,index) in student">
+                {{index}}-{{key}}-{{value}}
+            </li>
+
+        </ul>
+
+        <h3>普通数组遍历</h3>
+        <ul>
+            <li v-for="(array,index) in arrays" :key="index">{{index}}-{{array}}</li>
+        </ul>
+
+        <h3>绑定key对象数组遍历</h3>
+        序号:<input v-model="d_id" placeholder="输入序号">
+        姓名:<input v-model="d_name" placeholder="输入姓名">
+        <button @click="addStudent()">添加学生名单</button>
+        <ul>
+            <li style="list-style: square;" v-for="stu in students" :key="stu.id">{{stu.id}}--{{stu.name}}</li>
+
+        </ul>
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                shoppings: [
+                    {
+                        bookName: "web前端开发技术",
+                        issn: '97873024886367',
+                        author: '储久良'
+
+                    },
+                    {
+                        bookName: "Vue.js实战",
+                        issn: '9787302484929',
+                        author: '梁然'
+
+                    },
+                    {
+                        bookName: "spring BootVue全栈开发实战",
+                        issn: '9787302517979',
+                        author: '王松'
+
+                    }],
+                student: {
+                    name: '张三丰',
+                    class: '20软件工程1-2班',
+                    age: 20
+                },
+                arrays: [100, 200, 300, 205, 110, 96],
+                students: [{
+                    id: 1,
+                    name: '张开江'
+                },
+                {
+                    id: 2,
+                    name: '宋思明'
+                }],
+                d_id: '',
+                d_name: ''
+            },
+
+            methods: {
+                addStudent() {
+                    this.students.push({
+                        id: this.d_id,
+                        name: this.d_name
+                    })
+                }
+
+            }
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>

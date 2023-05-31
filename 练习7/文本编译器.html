@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本编辑器</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .jiacu{
+            font-weight: 900;
+        }
+        .qingxie{
+            font-style: italic;
+        }
+        .xiahuaxian{
+            text-decoration: underline;
+        }
+        .right{
+            text-align: right;
+        }
+        .left{
+            text-align: left;
+        }
+        .center{
+            text-align: center;
+        }
+        button{
+            width: 80rpx;
+            font-weight: 600;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>简单文本编辑器</h2>
+    <div style="padding-top: 20rpx">
+        <textarea :class="styleObject" style="min-width: 440px" :style="{fontSize: size+'rem'}">Hello World!</textarea>
+    </div>
+
+    <div style="padding-top: 20rpx">
+        <h3 style="margin: 0">格式设置</h3>
+        <div >
+            <button @click="jiacu()">加粗</button>
+            <button @click="qingxie()">倾斜</button>
+            <button @click="xiahuaxian()">下划线</button>
+
+            字体{{size}}em
+            <button style="margin-left: 20rpx" @click="subSize()">-</button>
+            <button @click="addSize()">+</button><br>
+    
+            <button @click="textleft()">left</button>
+            <button @click="textcenter()">center</button>
+            <button @click="textright()">right</button>
+        </div>
+    </div>
+   
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+    // Vue.config.productionTip = false;
+    const vm =new Vue({
+        el: "#app",
+        data:{
+            styleObject:[],
+            size:2,
+
+        },
+        methods:{
+            jiacu(){
+                 var index = this.styleObject.indexOf("jiacu");
+                if (index === -1) {
+                    /*不存在*/
+                    this.styleObject.push('jiacu');
+                } else {
+                    console.log("jiacu位置为："+index);
+                    this.styleObject.splice(index,1);
+                }
+                console.log(this.styleObject);
+            },
+            qingxie(){
+                var index = this.styleObject.indexOf("qingxie");
+                if (index === -1) {
+                    /*不存在*/
+                    this.styleObject.push('qingxie');
+                } else {
+                    console.log("qingxie位置为："+index);
+                    this.styleObject.splice(index,1);
+                }
+                console.log(this.styleObject);
+            },
+            xiahuaxian(){
+                var index = this.styleObject.indexOf("xiahuaxian");
+                if (index === -1) {
+                    /*不存在*/
+                    this.styleObject.push('xiahuaxian');
+                } else {
+                    console.log("xiahuaxian位置为："+index);
+                    this.styleObject.splice(index,1);
+                }
+                console.log(this.styleObject);
+            },
+            textleft(){
+                var index_r = this.styleObject.indexOf("right");
+                var index_c = this.styleObject.indexOf("center");
+                var index_l = this.styleObject.indexOf("left");
+
+                if (index_l === -1) {
+                    if (index_r===-1&&index_c===-1) {
+                        this.styleObject.push('left');
+                    }else{
+                        if (index_r !== -1) {
+                            this.styleObject.splice(index_r,1,"left");
+                        }
+                        if (index_c !== -1) {
+                            this.styleObject.splice(index_c,1,"left");
+                        }
+                    }
+                }
+                console.log(this.styleObject)
+
+            },
+            textright(){
+                var index_l = this.styleObject.indexOf("left");
+                var index_c = this.styleObject.indexOf("center");
+                var index_r = this.styleObject.indexOf("right");
+
+                if (index_r === -1) {
+
+                    if (index_l===-1&&index_c===-1) {
+                        this.styleObject.push('right');
+                    }else{
+                        if (index_l !== -1) {
+                            this.styleObject.splice(index_l,1,"right");
+                        }
+                        if (index_c !== -1) {
+                            this.styleObject.splice(index_c,1,"right");
+                        }
+                    }
+                }
+
+                console.log(this.styleObject)
+            },
+            textcenter(){
+                var index_l = this.styleObject.indexOf("left");
+                var index_c = this.styleObject.indexOf("center");
+                var index_r = this.styleObject.indexOf("right");
+                if (index_c === -1) {
+                    if (index_l===-1&&index_r===-1) {
+                        this.styleObject.push('center');
+                    }else{
+                        if (index_l !== -1) {
+                            this.styleObject.splice(index_l,1,"center");
+                        }
+                        if (index_r !== -1) {
+                            this.styleObject.splice(index_r,1,"center");
+                        }
+                    }
+                }
+                console.log(this.styleObject)
+            },
+            addSize(){
+                this.size = this.size+0.5;
+            },
+            subSize() {
+                this.size = this.size-0.5;
+            },
+
+
+
+        }
+
+    })
+
+
+
+
+</script>
+
+
+</body>
+</html>

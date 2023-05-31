@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project2</title>
+    <script type="application/javascript" src="./js/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>watch 属性综合应用</h1>
+      <h2>简单数据：学费</h2>
+      <p>原学费：{{tuition}} 元</p>
+      <p>版更后的学费: {{tuitionChanged}} 元</p>
+      <h2>数组：班级列表</h2>
+      <ul>
+        <li v-for="item in classList" :key="item">
+          {{item}}
+        </li>
+      </ul>
+      <h2>对象：学生信息</h2>
+      <p>初始化数据：姓名：{{student.name}}，年龄：{{student.age}}，性别：{{student.sex}}</p>
+      <p>变化后数据：姓名：{{studentChanged.name}}，年龄：{{studentChanged.age}}，性别：{{studentChanged.sex}}</p>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: '#app',
+        data: {
+          tuition: 6500,
+          tuitionChanged: null,
+          classList: [
+         "18软件2班",
+         "19计算机1班",
+         "18会计6班",
+         "20电信1班",
+         "21大数据1-4班",
+          ],
+          student: {
+            name: '张三',
+            age: 22,
+            sex: '男'
+          },
+          studentChanged: {}
+        },
+        watch: {
+          student: {
+            handler: function (newVal, oldVal) {
+              this.studentChanged = {
+                name: '张晓娟',
+                age: 22,
+                sex: '女'
+              };
+            },
+            immediate: true,
+            deep: true,
+          },
+          tuition: {
+            handler: function (newVal, oldVal) {
+              this.tuitionChanged = 5000;
+            },
+            immediate: true,
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

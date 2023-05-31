@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>会员列表</h1>
+        搜索：<input type="text" placeholder="请输入您的筛选条件" v-model="keyword">
+        <!-- <button @click="sortSx">按年龄升序</button> -->
+        <button @click="change">改变第一项</button>
+
+
+        <ul>
+            <li v-for="stu in filterStu" :key="stu.id">
+                {{stu.name}}-{{stu.age}}-{{stu.sex}}
+            </li>
+        </ul>
+
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                //0:升序 1:降序 2:原始顺序
+                flag:0,
+                keyword: '',
+                // filterStu: [],
+                students: [
+                    { id: '001', name: '诸葛孔明', age: '1350', sex: '男' },
+                    { id: '002', name: '诸葛瑾', age: '1530', sex: '男' },
+                    { id: '003', name: '张三丰', age: '140', sex: '女' },
+                    { id: '004', name: '周三强', age: '60', sex: '男' },
+                    { id: '005', name: '刘晓明', age: '30', sex: '女' },
+                ]
+            },
+            computed: {
+
+            filterStu(){
+                const arr = this.students.filter((stu) => { return stu.name.indexOf(this.keyword) !== -1})
+                
+                return arr
+            }
+
+            },
+            methods:{
+                change(){
+                    this.students.splice(0,1,{id:'001',name:'zhangsan',age:'89',sex:'女'})
+                }
+            }
+
+        })
+    </script>
+
+
+</body>
+
+</html>

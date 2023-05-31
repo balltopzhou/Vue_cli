@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+
+    <div id="root">
+        <!-- <h1>v-text</h1>
+        <span>您好！,{{msg}}</span><br>
+        <span v-text="msg">您好！</span><br>
+        <span v-html="msghtml">您好！</span> -->
+
+
+        <!-- <h2 v-big="n">显示n的值：{{n}}</h2>
+        <h2>显示n的值：{{n}}</h2>
+        <button @click="n++">add</button> -->
+
+<div v-demo="{color:'red',text:'您好!'}">
+
+</div>
+
+
+    </div>
+    
+
+<script>
+    new Vue({
+    el:'#root',
+    data:{
+        msg:'刘婵',
+        msghtml:'哈哈哈哈',
+        n:0
+    },
+    directives:{
+        // big(el,binding){
+        //     el.value=binding.value*10
+        // }
+
+        demo(el,binding){
+            el.style.width='300px'
+            el.style.height='300px'
+            el.style.backgroundColor=binding.value.color
+            el.innerText=binding.value.text
+        }
+    }
+})
+</script>
+
+</body>
+</html>

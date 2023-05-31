@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <style type="text/css">
+        .redP {
+            color: red;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .class-a {
+            color: green;
+            font-size: 36px;
+            font-weight: bolder;
+        }
+
+        .class-b {
+            border: 1px dashed #0033CC;
+        }
+
+        .active {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .static {
+            color: #667788;
+            font-size: 24px;
+        }
+
+        .redText {
+            color: red;
+            background: #EDEDED;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root">
+        <p v-bind:class="myClass">普通变量：Vue应用前景宽广！</p>
+        <p :class="classObject">对象：Vue应用前景宽广！</p>
+        <div v-bind:class="{active: isActive }">对象：Vue应用前景宽广！</div>
+        <div v-bind:class="[classA, classB]">数组：Vue非常好学！</div>
+         <div class="static" v-bind:class="{active: isActive, redText: hasError }"> 
+            v-bind:class指令与普通的class属性共存。
+            </div>
+         <div v-bind:style="{color:activeColor,fontSize:fontSize+'px'}">绑定style</div>
+        <div :style="styleObject">style对象</div>
+        <div v-bind:style="[styleObjectA, styleObjectB]">style数组</div>
+         </div>
+    
+    <script>
+        Vue.config.productionTip = false;
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                myClass: 'redP',
+                classObject: {
+                    'class-a': true,
+                    'class-b': true,
+                },
+                classA: 'class-a',
+                classB: 'class-b',
+                isActive: true,
+                hasError: true,
+                activeColor: '#99DD33',
+                fontSize: 36,
+                styleObject: {
+                    border: '2px' + ' solid' + '#99AA33',
+                    fontSize: 32 + 'px',
+                },
+                styleObjectA: {
+                    color: 'blue',
+                    fontSize: 36 + 'px'
+                },
+                styleObjectB: {
+                    background: '#DFDFDF'
+                }
+
+            },
+        })
+    </script>
+
+</body>
+
+</html>

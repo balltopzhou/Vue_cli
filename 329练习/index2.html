@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch 属性的完整应用</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>watch属性的完整应用</h1>
+
+        <div id="cost">
+            <h1>简单数据：学费</h1>
+            <p>原学费：{{cost}}元</p>
+            <P>变更后的学费：{{newcost}}元</P>
+        </div>
+
+        <div id="list">
+            <h1>数组：班级列表</h1>
+            <ul>
+                <li v-for="item in classes">
+                    {{item.info}}
+
+                </li>
+
+            </ul>
+        </div>
+
+        <div id="target">
+            <h1>对象：学生信息</h1>
+            <p>初始化数据：姓名{{name}},年龄：{{age}},性别：{{sex}}</p>
+            <p>变化后数据：姓名{{name}},年龄：{{age}},性别：{{sex}}</p>
+            <p>本学期新开课程：{{}}</p>
+        </div>
+    </div>
+
+    <script>
+
+        new Vue({
+            el: '#root',
+            data: {
+                cost: 6500,
+                newcost: 5000,
+                classes: [
+                    { info: '18软件2班' },
+                    { info: '19计算机1班' },
+                    { info: '18会计6班' },
+                    { info: '20电信1班' },
+                    { info: '21大数据1-4班' },
+                ],
+                name: '',
+                age: 0,
+                sex: ''
+
+            },
+            watch: {
+                newcost: {
+                    depp: true,
+                    immediate: true,
+                    handler(newcost, oldcost) {
+                        console.log('学费发生变化，由' + oldcost + '变为' + newcost);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on指令修饰符的应用</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .scrllList{
+            border:1px solid black;
+            width:200px;
+            height:100px;
+            overflow:scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>
+        v-on指令修饰符的应用
+    </h3>
+    <div id="demo">
+        <div v-on:click.prevent.self="divHandler" class="clickDiv">我是div,单击我试试！</div>
+        <div v-on:click.prevent.self="divHandler">
+            <input type="button" value="单击我一下1" @click.stop="btnHandler">
+            <a href="http://www.edu.cn" @click.prevent.self="atEdu">教育网</a>
+            <a href="http://www.edu.cn" @click.prevent="atEdu">教育网</a><br>
+            <input type="button" value="单击我一下2" @click.capture="btnHandler">
+            <h3>.self修饰符</h3>
+            <input type="button" value="单击我一下3" @click.self.prevent="btnHandler">
+            <form v-on:submit.preventZ></form>
+            <button type="button" @click.once="btnHandler">单击多次只执行一次</button>
+            <div v-on:scroll.passive="onScroll" class="scrllList">
+                <h3>Vue.js是什么</h3>
+                Vue (读音 /vju:/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是,
+                Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，
+                还便于与第三方库或既有项目整合。另一方面，
+                当与现代化的工具链以及各种支持类库结合使用时，
+                Vue 也完全能够为复杂的单页应用提供驱动。如果你想在深入学习 Vue 之前对它有更多了解，
+                我们制作了一个视频，带您了解其核心概念和一个示例工程。
+            </div>
+            <p>滚动<span>{{x}}</span>次。</p>
+
+        </div>
+    </div>
+
+        <script>
+            new Vue({
+                el: '#demo',
+                data: {
+                    x: 0,
+                    count: 0
+                },
+                methods: {
+                    divHandler: function () {
+                        console.log('单击了div1!');
+
+                    },
+                    btnHandler: function () {
+                        this.count = this.count + 1
+                        console.log('单击了button!' + this.count + "下");
+
+                    },
+                    atEdu: function () {
+                        console.log('中国教育和科研计算机网')
+                    },
+                    onScroll: function () {
+                        for (var i = 0; i < 5; i++) {
+                            console.log('滚动事件被执行' + i)
+
+                        }
+                        this.x += 1;
+                    }
+                }
+            })
+        </script>
+
+</body>
+
+</html>

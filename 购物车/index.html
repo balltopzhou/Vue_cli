@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        * {
+            background-color: antiquewhite;
+        }
+
+        #ui {
+            text-align: center;            
+
+        }
+
+        table {
+            height: 300px;
+            width: 500px;
+            margin: 0 auto;
+            border: 0;
+
+        }
+
+        td {
+            height: 30px;
+        }
+
+        td input {
+            background-color: rgb(121, 192, 249);
+            border-radius:20%
+        }
+
+    </style>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="ui">
+        <p>欢迎来到文理购物广场</p>
+            <table rules="none">
+                <tr>
+                    <td>id</td>
+                    <td>名称</td>
+                    <td>价格</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>操作</td>
+                </tr>
+                <tr v-for="(value,index) in goodArr">
+                    <td>{{value.id}}</td>
+                    <td>{{value.name}}</td>
+                    <td>{{value.price}}</td>
+                    <td v-model="value.count">
+                        <input @click="reduceCount(index)" id="reduceBut" type="button" value="-">
+                        {{value.count}}
+                        <input @click="addCount(index)" id="addBut" type="button" value="+">
+                    <td>{{(value.price)*(value.count)}}</td>
+                    </td>
+                    <td> <input @click="delGood(index)" id="delBut" type="button" value="移除"></td>
+                </tr>
+            </table>
+        <p>总计：￥{{countTotalPrice()}}</p><br>
+        <div>
+           搜索： <input type="text" placeholder="请输入您的筛选条件" v-model="keyword"></br>
+           <ul>
+            <li v-for="good in goods" :key="good.id" style="list-style:none">
+                {{good.name}}-{{good.price}}-{{good.count}}
+            </li>
+        </ul>
+        </div>
+        <div class="box1">
+            <input type="text" placeholder="请输入商品id" v-model="goodAdded.id"><br>
+            <input type="text" placeholder="请输入商品名称" v-model="goodAdded.name"><br>
+            <input type="text" placeholder="请输入商品价格" v-model="goodAdded.price"><br>
+            <input type="text" placeholder="请输入商品数量" v-model="goodAdded.count"><br>
+            <input @click="addGood()" type="submit" placeholder="请输入商品数量" value="添加商品"><br>
+        </div>
+
+        <div class="box2">
+            <input type="text" placeholder="请输入商品id" v-model="goodUpdated.id"><br>
+            <input type="text" placeholder="请输入商品名称" v-model="goodUpdated.name"><br>
+            <input type="text" placeholder="请输入商品价格" v-model="goodUpdated.price"><br>
+            <input type="text" placeholder="请输入商品数量" v-model="goodUpdated.count"><br>
+            <input @click="updateGood()" type="submit" placeholder="请输入商品数量" value="更新商品"></br>
+        </div>
+       
+
+    </div>
+
+    <script>
+        let ui = new Vue({
+            el: "#ui",
+            data: {
+                keyword: '',
+                goods:[],
+                goodArr: [
+                    {
+                        id: 1,
+                        name: "华为mate30",
+                        price: 4099,
+                        count: 0
+                    },
+                    {
+                        id: 2,
+                        name: "华为P30pro",
+                        price: 4699,
+                        count: 0
+                    },
+                    {
+                        id: 3,
+                        name: "荣耀20pro",
+                        price: 2699,
+                        count: 0
+                    }
+                ],
+                goodAdded: {
+                    id: 0,
+                    name: "",
+                    price: 0,
+                    count: 0
+                },
+                goodUpdated: {
+                    id: 0,
+                    name: "",
+                    price: 0,
+                    count: 0
+                }
+
+            },
+            watch: {
+                keyword: {
+                    immediate:true,
+                    handler(newval) {
+                        // console.log('keyword的新值',newval,'旧值',oldval)
+                        this.goods = this.goodArr.filter((good) => {
+                            return good.name.indexOf(newval) !== -1
+                        })
+                    }
+                }
+
+            },
+            methods: {
+
+                reduceCount(index) {
+                    if (this.goodArr[index].count > 0) {
+                        this.goodArr[index].count--;
+                    } else {
+                        alert("数量不能为负!")
+                    }
+                },
+                addCount(index) {
+                    this.goodArr[index].count++;
+
+                },
+                countTotalPrice() {
+                    let totalPrice = 0;
+                    for (let i = 0; i < this.goodArr.length; i++) {
+                        totalPrice += this.goodArr[i].count * this.goodArr[i].price;
+                    }
+                    return totalPrice;
+                },
+                delGood(index) {
+                    this.goodArr.splice(index, 1);
+
+                },
+                addGood() {
+                    if (this.goodAdded.id != 0 && this.goodAdded.name != null && this.goodAdded.price != 0 && this.goodAdded.count != 0) {
+                        this.goodArr.push(this.goodAdded);
+                    } else {
+                        alert("商品id,商品名，商品价格与商品数量不能为空!");
+                    }
+                },
+                updateGood() {
+                    if (this.goodUpdated.id != 0 && this.goodUpdated.name != null && this.goodUpdated.price != 0 && this.goodUpdated.count != 0) {
+                        for (let i = 0; i < this.goodArr.length; i++) {
+                            if (this.goodArr[i].id == this.goodUpdated.id) {
+                                this.goodArr[i].name = this.goodUpdated.name;
+                                this.goodArr[i].price = this.goodUpdated.price;
+                                this.goodArr[i].count = this.goodUpdated.count;
+                            }
+                        }
+                    } else {
+                        alert("商品id,商品名，商品价格与商品数量不能为空!");
+                    }
+                }
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>

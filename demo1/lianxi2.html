@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习2</title>
+    <script src="./JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="demo">
+        <h3>v-on属性值为一般表达式计数器</h3>{{ count }}
+        <button type="button" @click="add">Count</button>
+
+        <h3>v-on属性值为方法：当前系统日期{{now}}</h3>
+        <button type="button" @click="displayDate">显示日期</button>
+
+        <h3>v-on属性值为带参数的方法计:算区间的整数和={{sumInt}}</h3>
+        <button type="button" @click="dispalyName(100,200)">计算累加和</button>
+
+        <h3>v-on属性值为带$event的方法:访问原生的event对象：{{information}}</h3>
+        <button type="button" @click="showInfo1('用$event传入!',$event)">带$event参数</button>
+
+        <h3>v-on属性值为不带参数的方法:默认传入event,类型：{{typeObject}}</h3>
+        <button type="button" @click="showInfo2">不带参数</button>
+    </div>
+    <script type="text/javascript">
+        new Vue({
+            el: "#demo",
+            data: {
+                count: 0,
+                now: '',
+                sumInt: 0,
+                information: '',
+                typeObject: ''
+
+            },
+            methods: {
+                add: function () {
+                    this.count++;
+                },
+
+                displayDate: function () {
+                    this.now = (new Date()).toLocaleString();
+
+                },
+                dispalyName: function (start, end) {
+                    for (var i = start, intSum = 0; i <= end; i++) {
+                        intSum += i;
+                    }
+                    this.sumInt = intSum;
+                },
+                showInfo1: function (message, event) {
+                    //访问原生事件对象，用来阻止默认事件
+                    if (event) event.preventDefault()
+                    console.log(event);
+                    this.information=message;
+                },
+                showInfo2: function (event) {
+                    if (event) event.preventDefault()
+                    this.typeObject=typeof(event);
+
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

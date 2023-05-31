@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构建组件</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <school></school>
+<hr>
+<stu></stu>
+
+    </div>
+        
+    </div>
+
+    <script>
+
+        const school = Vue.extend({
+            template:
+                `  <div>
+                < h2 > 学校信息</h2>
+        <h2>学校姓名：{{schoolName}}</h2>
+        <h2>学校地址:{{schoolAddress}}</h2>
+        </div > `,
+
+            data: function () {
+                return {
+                    schoolName: '重庆物理学院',
+                    schoolAddress: '重庆永川区红河大道319#',
+                }
+            }
+
+        })
+
+        const stu = Vue.extend({
+
+            template:
+                `  <div>
+                    <h2>学生信息</h2>
+        <h2>学生姓名：{{stuName}}</h2>
+        <h2>学校年龄:{{age}}</h2>
+        <button @click="changeSN()">点我改学生信息</button>
+        </div > `,
+
+            data: function () {
+                return {
+                    stuName: '张三',
+                    age: 18
+                }
+            },
+            methods:{
+            changeSN(){
+                    this.stuName='李四'
+                
+            }
+        }   
+
+        })
+
+
+
+        new Vue({
+            el: '#root',
+            data: {
+
+            },
+            components: {
+                school,
+                stu
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

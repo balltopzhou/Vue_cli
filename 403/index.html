@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class和style样式</title>
+    <script src="./js/vue.js" onload="Vue.config.productionTip = false"></script>
+
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <ul>
+            <li v-if="stu in student" :key="stu.id">学号：{{stu.id}} 姓名：{{stu.name}} 年龄：{{stu.age}}</li>
+        </ul>
+
+        <h1>列表渲染对象</h1>
+        <ul>
+            <li v-if="(val,key,index) in object" :key="index">{{index}}-{{key}}-{{val}}</li>
+        </ul>
+
+        <h1>遍历数组对象</h1>
+        <ul>
+            <li v-if="(num,index) in nums" :key="index">{{index}}-{{num}}-{{val}}</li>
+        </ul>
+
+    </div>
+
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                student: [
+                    { id: '001', name: '张三', age: '16' },
+                    { id: '001', name: '张三', age: '16' },
+                    { id: '001', name: '张三', age: '16' }
+                ],
+
+                object: {
+                    name: 'zzh',
+                    url: 'http://www.runoob.com',
+                    slogan: '学籍学校就'
+                },
+                nums:[100,200,300,400,500,600],
+
+
+
+            },
+
+        })
+
+
+    </script>
+
+</body>
+
+</html>

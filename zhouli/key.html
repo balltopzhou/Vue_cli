@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key值遍历</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <button @click="addStu()">添加学生</button>
+        <ul>
+            <li v-for="(stu,index) in students" :key="stu.id">
+                姓名：{{stu.name}},年龄:{{stu.age}}
+                <input type="text">
+            </li>
+        </ul>
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                students:[
+                    {id:'001',name:'张三',age:'21'},
+                    {id:'002',name:'李四',age:'21'},
+                    {id:'003',name:'王五',age:'21'}
+                ]
+            },
+            methods:{
+                addStu(){
+                    this.students.unshift({id:'004',name:'赵六',age:'23'})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

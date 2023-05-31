@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>侦听属性实验</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        .demo {
+            border-bottom: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="demo">
+            <h1>银行帐户余额变更通知</h1>
+            <p>账号：{{account}}</p>
+            <p>余额为：10000</p>
+            支取人民币：<input placeholder="输入金额" v-model="money">
+            <button @click='greet'>支取{{money}}元</button>
+
+            <p>支取后余额为： {{sum}}元</p>
+
+            <h1>以下是支出明细帐</h1>
+        </div>
+        <div id="info">
+            <template v-for="(item, index) in outgoList">
+                <p></p>第{{index+1}}次，支取{{item.money}}，余额为{{item.sum}}</p>
+            </template>
+        </div>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                account: '202058304005周丽',
+                money: 0,
+                sum: 10000,
+                index:0,
+                outgoList: []
+
+            },
+            methods: {
+                greet: function () {
+                    this.sum -= this.money
+                    this.outgoList.push({
+                        money: this.money,
+                        sum: this.sum,
+                    });
+                },
+            },
+            watch: {
+                sum: function (newValue, oldValue) {
+                   alert('账户余额由'+oldValue+'变为'+newValue+'!');
+
+                }
+
+            }
+
+        })
+    </script>
+</body>
+
+</html>

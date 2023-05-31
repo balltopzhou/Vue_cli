@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>练习</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div id="root">
+			<h3>计算属性缓存与方法比较应用</h1>
+			<p>数组元素为：{{arrayNumber}}</p>
+			<h3>第一次输出结果：
+				<h3>使用computed：{{maxNumber}}</h3>
+				<p>使用computed：{{minNumber()}}</p>
+			</h3>
+			<h3>第二次输出结果：
+				<p>使用computed：{{maxNumber}}</p>
+				<p>使用computed：{{minNumber()}}</p>
+			</h3>
+		</div>
+		<script>
+			Vue.config.productionTip = false;
+			const vm = new Vue({
+				el:"#root",
+				data: {
+				    arrayNumber: [100, -200, 308, 78, 25, 56, 110]
+				},
+				computed: {
+					maxNumber: function() {
+						console.log('maxNumber被调用');
+						return 'maxNumber，数组中最大数为'+Math.max(...this.arrayNumber);
+					}
+				},
+				methods: {
+					minNumber: function() {
+						console.log('methods方法被调用');
+						return 'maxNumber，数组中最大数为'+Math.min(...this.arrayNumber);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

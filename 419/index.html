@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style type="text/css">
+        .basic{
+            width: 400rpx;
+            height: 100rpx;
+            font-size: 18rpx;
+            border: 1px solid black;
+            border-radius: 10rpx;
+        }
+        
+        .fontblod{
+            font-weight: bolder;
+        }
+        .fontitalic{
+            font-style: italic;
+        }
+        
+        .fontunderline{
+            font-style:oblique;
+        }
+        button{
+            width: 80rpx;
+        }
+        
+            </style>
+</head>
+<body>
+    <div id="root">
+<h2>简单文本编译器</h2>
+<input type="text" class="basic" value="Hello world!" :class="font" :style="style">hello world!
+
+
+
+<h3>格式设置</h3>
+<button @click="font.fontweight=!font.fontweight">加粗</button>
+<button @click="font.fontitalic=!font.fontitalic">倾斜</button>
+<button @click="font.fontunderline=!font.fontunderline">下划线</button>
+<input type="number" v-model="size" style="width: 100rpx;"><br>
+<button @click="" textAligin="left">left</button>
+<button :style="style5">center</button>
+<button :style="style6">rigth</button>
+
+    </div>
+
+    <script>
+new Vue({
+    el:'#root',
+    data:{
+
+    },
+    style1:{
+        fontweight:'bold',
+
+    },
+    style2:{
+        fontstyle:'oblique',
+
+    },
+    style3:{
+        textdecoration:' underline'
+
+    },
+    style4:{
+        align: 'left'
+
+    },
+    style5:{
+        align: 'center'
+
+    },
+    style6:{
+        align: 'right'
+
+    },
+})
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineproperty</title>
+    <script src="./JS/vue.js"></script>
+</head>
+<body>
+    <div class="root">
+        <h1>defineproperty</h1>
+
+
+    </div>
+
+    <script>
+        // Vue.congig.productionTip=false;
+    let num = 18
+    var student={
+        name:'周丽',
+        sex:'女',
+
+
+}
+Object.defineProperty(student,'age',{
+    // value:num,
+    enumerable:true,
+    // writable:true,
+    configurable:true,
+    get(){
+        console.log('有人在读取num')
+        return num;
+    },
+    set(val){
+        console.log('有人修改age')
+        num = val
+    }
+})
+console.log(student)
+
+        new Vue({
+            el:"#root",
+        data:{
+            
+        }
+
+        })
+        
+    </script>
+</body>
+</html>

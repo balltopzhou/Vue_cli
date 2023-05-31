@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <script src="./js/day.min.js"></script>
+</head>
+
+
+<body>
+    <div id="root">
+        <h1>现在的时间是：</h1>
+        <h2>{{time}}</h2>
+        <h2>计算属性实现：{{fatTime}}</h2>
+        <h2>方法实现：{{setTime()}}</h2>
+        <h2>过滤器实现： {{time | fmtFilTime}}</h2>
+        <h2>过滤器实现： {{time | fmtFilTime | filSlice}}</h2>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                time:Date.now()
+            },
+
+            computed:{
+                fatTime(){
+                    return dayjs(this.time).format('YYYY年MM月DD日')
+                }
+            },
+
+            methods:{
+                setTime(){
+                    return dayjs(this.time).format('YYYY年MM月DD日')
+                }
+            },
+            filters:{
+                fmtFilTime(val){
+                    return dayjs(val).format('YYYY年MM月DD日 hh:mm:ss')
+                },
+                filSlice(val){
+                    return val.slice(0,4)
+                }
+            }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

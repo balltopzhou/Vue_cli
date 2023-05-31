@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 元素在页面载入时候开始渐隐渐显 -->
+        <h2 :style="{opacity}" @click="change()">欢迎大家来到重庆文理学院学习</h2>
+        <button @click="stop">停止变换</button>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                opacity: 1,
+                step: 0.01,
+                flag:true
+
+            },
+
+
+           mounted(){
+            console.log('mounted执行，定时器开始工作')
+            this.timer1 = setInterval(() =>{
+                if(this.opacity <=0){
+                    this.step= -0.01
+                }
+                if(this.opacity >1){
+                    this.step= 0.01
+                }
+                this.opacity -=this.step
+            },50)
+            
+            
+           },
+
+           methods:{
+            stop(){
+                this.$destroy()
+            }
+           },
+
+           beforeDestroy(){
+            clearInterval(this.timer1)
+           }
+
+
+
+
+
+
+
+
+
+            // mounted(){
+
+
+            //         setInterval(() => {
+
+            //             if (vm.opacity <= 0) {
+            //                 this.step = -0.01
+            //             }
+
+            //             if (vm.opacity >= 1) {
+            //                 this.step = 0.01
+            //             }
+
+            //             vm.opacity = vm.opacity - this.step
+
+
+            //         }, 100)
+                
+            // }
+
+        })
+
+
+    </script>
+</body>
+
+</html>

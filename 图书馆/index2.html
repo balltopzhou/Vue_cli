@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <script src="../js/vue.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>简易图书管理系统</title>
+    <style>
+        .container {
+            border: 2px dotted rgb(23, 148, 50);
+        }
+
+        .container h1 {
+            height: 100px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            color: blue;
+            background-color: rgb(166, 201, 96);
+            border-radius: 2px"
+
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .form-control {
+            border: 2px dotted rgb(23, 148, 50);
+        }
+
+        .table {
+            margin-top: 20px;
+            border: 1px solid rgb(23, 148, 50);
+            text-align: center;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id='app'>
+        <div class="container">
+            <h1>简易图书管理系统</h1>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="id">id：</label>
+                    <input type="number" class="form-control" id="id" placeholder="请输入图书id" v-model="id">
+                </div>
+                <div class="form-group">
+                    <label for="name">名称：</label>
+                    <input type="text" class="form-control" id="name" placeholder="请输入图书名称" v-model="name">
+                </div>
+                <div class="form-group">
+                    <label for="publishing">出版社：</label>
+                    <input type="text" class="form-control" id="publishing" placeholder="请输入出版社"
+                        v-model="publishing">
+                </div>
+                <div class="form-group">
+                    <label for="author">作者：</label>
+                    <input type="text" class="form-control" id="author" placeholder="请输入作者" v-model="author">
+                </div>
+
+                <button type="submit" class="btn btn-primary" @click.prevent="add"
+                    style="background-color: rgb(3, 139, 3);">添加</button>
+            </form>
+            <form class="form-inline">
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="keywords">请输入搜索关键字：</label>
+                    <input type="text" class="form-control" id="keywords" placeholder="请输入搜索关键字" v-model="keywords">
+                </div>
+            </form>
+            <table class="table" align="center" border="1px">
+                <thead style="background-color:rgb(166, 201, 96);">
+                    <tr>
+                        <th>序号</th>
+                        <th>图书名称</th>
+                        <th>出版社</th>
+                        <th>作者</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in books_result">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.publishing}}</td>
+                        <td>{{item.author}}</td>
+                        <td>{{item.atime|timeFormat}}</td>
+                        <td><button class="btn btn-danger" @click.prevent="update(item.id)"
+                                style="background-color:  rgb(3, 139, 3);">编辑</button>
+                            <button class="btn btn-danger" @click.prevent="del(item.id)"
+                                style="background-color:  rgb(3, 139, 3);">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                books: '',
+                id: '',
+                name: '',
+                author: '',
+                publishing: '',
+                atime: new Date(),
+                bookInfo: {
+                    name: "",
+                },
+                keywords: "",
+                flag: false,
+                submitFlag: false
+
+            },
+
+
+            // 查询图书信息  采用计算属性computed来实现（思路：如果输入的关键字为空，就显示原有的所有图书记录，否则就显示包含关键字的一条或多条记录）
+            computed: {
+                books_result() {
+                    var _this = this;
+                    if (this.keywords) {
+                        //this的作用域到此结束，无法穿透进入filter函数,所以需要用一个变量（比如_this）来保存this的指向。
+
+                        // 下面的参数item指的是其中一条图书的搜索记录
+                        let newBooks = this.books.filter(function (item) {
+                            if (item.name.indexOf(_this.keywords) >= 0) {
+                                //找到输入的关键词对应的书名的索引，存在则>=0,不存在则返回-1
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+
+                        return newBooks
+                    } else {
+                        return this.books //没有关键词就显示所有的数据
+                    }
+                }
+            },
+            methods: {
+
+                // 添加图书记录
+                add() {
+                    // 判断是否为编辑模式
+                    if (this.flag) {
+                        // 根据当前的id更新数组中对应的数据
+                        this.books.forEach(item => {
+                            if (item.id == this.id) {
+                                item.name = this.name;
+                                item.publishing = this.publishing;
+                                item.author = this.author;
+                                atime = new Date();
+                                return;
+                            }
+                        });
+                        this.flag = false;
+                    } else {
+                        // 添加图书
+                        let book = {};
+                        book.id = this.id;
+                        book.name = this.name;
+                        book.publishing = this.publishing;
+                        book.author = this.author;
+                        book.atime = new Date();
+                        this.books.push(book);
+                    }
+                    // 清空表单
+                    this.id = '';
+                    this.name = '';
+                    this.publishing = '';
+                    this.author = '';
+                    this.atime = '';
+                },
+                update(id) {
+                    // 禁止改变id
+                    this.flag = true;
+                    // 根据id查询要编辑的数据
+                    let book = this.books.filter(item => {
+                        return item.id == id;
+                    });
+                    // 把获取的信息填充表单
+                    this.id = book[0].id;
+                    this.name = book[0].name;
+                    this.publishing = book[0].publishing;
+                    this.author = book[0].author;
+                    this.atime = new Date();
+                },
+                // 删除指定的图书记录
+                del(id) {
+                    this.books = this.books.filter(function (book) {
+                        return book.id != id;
+                    })
+                }
+            },
+            // 过滤器filters就是数据在真正渲染到页面中的时候，可以使用这个过滤器进行一些处理，把最终处理的结果渲染到网页中。
+            // 下面是通过过滤器（名字为timeFormat）将我们获取到的当前日期时间进行一定的处理变成我们希望的格式。
+            filters: {
+                timeFormat: function (value) {
+                    value = new Date(value);
+                    let year = value.getFullYear();
+                    let month = value.getMonth() + 1;
+                    let day = value.getDate();
+                    let hour = value.getHours();
+                    let minutes = value.getMinutes();
+                    return `${year}-${month}-${day} ${hour}:${minutes}`
+
+                }
+            },
+            // 自定义指令
+            directives: {
+                focus: {
+                    inserted(el) {
+                        el.focus();
+                    }
+                }
+            },
+            watch: {
+                name: function (val) {
+                    // 验证图书名称是否已经存在
+                    this.submitFlag = this.books.some(item => {
+                        // 如果存在则为真，将submitflag等于true
+                        return item.name == val;
+                    })
+
+                }
+            },
+            // 该声明周期钩子函数被触发时，模板已经可以使用了
+            // 一般此时用于获取后台数据，然后将数据填充到模板
+            mounted() {
+                var data =
+                    [
+                        { id: 1, "name": "精通Vue.js：Web前端开发技术详解", "publishing": "清华大学出版社", "author": "孙卫琴", "atime": new Date(), flag: false },
+                        { id: 2, "name": "java程序设计", "publishing": "电子工业出版社", "author": "耿祥义", "atime": new Date() },
+                        { id: 3, "name": "javaScript高级程序设计", "publishing": "高等教育出版社", "author": "张路路", "atime": new Date() },
+                    ];
+                this.books = data;
+            }
+        })
+    </script>
+</body>
+
+</html>

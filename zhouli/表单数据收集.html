@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据收集</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h3>表单收集数据</h3>
+        <form>
+           <label>账号：<input type="text" v-model="username"></label><br>
+           <label>密码：<input type="password" v-model="pwd"></label><br>
+           <label>年龄：<input type="number" v-model.number="age"></label><br>
+            性别：
+            <label>男<input type="radio" name="sex" v-model="sex" value="male"></label>
+            <label>女<input type="radio" name="sex" v-model="sex" value="female"></label>
+<br>
+            兴趣爱好：
+            <label><input type="checkbox"  v-model="hobby" value="eat">吃饭</label>
+            <label><input type="checkbox" v-model="hobby" value="sleep">睡觉</label>
+            <label><input type="checkbox" v-model="hobby" value="coding">敲代码</label>
+            <br>
+            你的专业：
+            <select v-model="professional">
+                <option value="" disabled>请选择你的专业</option>
+                <option value="计算机科学与技术">计算机科学与技术</option>
+                <option value="软件工程">软件工程</option>
+                <option value="网络工程">网络工程</option>
+                <option value="人工智能">人工智能</option>
+                <option value="信息工程">信息工程</option>
+            </select>
+            <br>
+            更多简介：
+            <textarea v-model="others"></textarea>
+            <br>
+            <input type="checkbox" v-model="agree">阅读<a href="http://www.cqwu.edu.cn">《用户协议》</a>
+            <button type="button" @click.prevent="sent()">确认并提交</button>
+        </form>
+    </div>
+
+    <script>
+    
+        new Vue({
+            el:'#root',
+            data:{
+                username:'',
+                pwd:'',
+                sex:'',
+                age:'',
+                hobby:[],
+                professional:'',
+                others:'',
+                agree:false
+            },
+
+            methods:{
+                sent(){
+                    console.log(JSON.stringify(this._data))
+                }
+            }
+        })
+    </script>
+</body>
+</html>

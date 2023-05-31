@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片展示--自定义指令</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+
+   
+    <div v-bind:style="style" style="display: flex; flex-wrap: wrap;width: 900px;">
+
+        <div v-img="image.url" v-for="image in images">
+            {{image.url}}
+        </div><br>
+
+
+    </div>
+    <div style="margin: 0 auto;display: flex; margin-top: 40px;">
+        <button @click="add()" style=" margin: 0 auto;"> 增加一张图片</button>
+    </div>
+</div>
+
+    <script>
+        Vue.directive('img', {
+            inserted: function (el, binding) {
+                el.style.width = 200 + 'px';
+                el.style.height = 200 + 'px';
+                el.style.dispaly = 'inline-block'
+                el.style.margin = '0 10px'
+                el.style.padding = '0 20px'
+                el.style.color = 'white'
+                el.style.border = '1px solid green'
+                el.style.backgroundImage = 'url(' + binding.value + ')';
+                el.style.backgroundRepeat = 'no-repeat';
+                el.style.backgroundSize = 'cover';
+            }
+
+        })
+
+        new Vue({
+            el: '#root',
+            data: {
+                style: {
+                    
+                    textAlign: 'center',
+                    margin: '0 auto',
+                    display: 'flex',
+                    padding:'40px'
+
+                },
+            images: [
+            { url: 'images/1.jpg' },
+            { url: 'images/2.jpg' },
+            { url: 'images/3.jpg' },
+            { url: 'images/4.jpg' },
+        ]
+            },
+
+            methods: {
+            add() {
+                this.images.push({
+                    url: 'images/5.jpg'
+                })
+            }
+        },
+        })
+
+
+    </script>
+</body>
+
+</html>

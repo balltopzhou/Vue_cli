@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="./JS/vue.js"></script>
+</head>
+
+<body>
+    <br id="root">
+    <button type="button" @click="add">add1</button><br>
+    <p>The button above has been clicked {{ counter }} times</p><br>
+    <a @click="doIt" href="http://www.baidu.com">去百度</a>
+    </div>
+
+    <script>
+        //Vue.congig.productionTip=false;
+        new Vue({
+            el: '#root',
+            data: {
+                counter: 0
+
+            },
+            methods:{
+                add: function () {
+                    this.counter++
+                    console.log(this)
+                },
+                doIt(a){
+                      a.preeventDefault() 
+                }
+
+            }
+        })
+
+
+
+
+
+    </script>
+
+</html>

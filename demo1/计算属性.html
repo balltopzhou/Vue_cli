@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./JS/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>计算属性缓存与方法比较应用</h1>
+        <p>数组元素为：{{arrayNumber}}</p>
+        <h1>第一次输出结果：</h1>
+        <p @click="maxNumber">使用computed: maxNumber,数组中的最大数为{{max}}</p>
+        <!-- <p @click="minNumber">使用methods: minNumber(),数组中的最大数为{{min}}</p> -->
+        <!-- <h1>第二次输出结果：</h1>
+        <p @click="maxNumber">使用computed: maxNumber,数组中的最大数为{{maxNumber}}</p>
+        <p @click="minNumber">使用methods: minNumber(),数组中的最大数为{{minNumber}}</p> -->
+    </div>
+    <script>
+        Vue.config.productionTip = false; //设置为 false 以阻止 vue 在启动时生成生产提示。
+        new Vue({
+            el: '#root',
+            data: {
+                //属性
+                arrayNumber: [100, -200, 308, 78, 25, 56, 110],
+
+            },
+            // methods: {
+
+            //     minNumber(){
+
+            //       function get(arrays) {
+            //         var arrays=[100, -200, 308, 78, 25, 56, 110];
+            //             console.log('methods被调用了');
+            //                 return Math.max.apply(null,arrays)
+            //         }
+            //     }
+            // },
+            computed: {
+                //计算属性
+                maxNumber:function() {
+                    console.log('计算属性被调用了');
+                    console.log(arrayNumber.Math(...arrayNumber));
+                    
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

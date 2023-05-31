@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>条件渲染综合应用</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <h2>条件渲染综合应用</h2>
+        <h3>1.使用v-if、v-else指令显示隐藏信息</h3>
+        <button v-if="flag" @click="transfer()">{{flag}}显示</button>
+        <button v-else @click="transfer()">{{flag}}隐藏</button>
+
+        <div v-if="flag">
+           <h3> 1.v-if命令：当flag为true时，我闪亮登场</h3>
+            <h3>模板内容</h3>
+            <h4>Vue 易学易用!</h4>
+        </div>
+        
+        <h4 v-else>1.v-else命令：当flag为false时，哎呀，我隐藏啦</h4>
+
+        <h2>2.使用v-if、v-else-if、v-else指令实现成绩百分制转为等级制</h2>
+        输入成绩：<input v-model="score" type="number">
+        <h4 v-if="score>=100">恭喜你，满分满分满分满分满分满分！</h4>
+        <h4 v-else-if="score<100&&score>=90">成绩等级为优秀</h4>
+        <h4 v-else-if="score<90&&score>=80">成绩等级为良好，还需努力哦</h4>
+        <h4 v-else-if="score<80&&score>=60">成绩等级为一般，需要更加努力哦</h4>
+        <h4 v-else-if="score<60&&score>=30">成绩等级为非常一般，需要更加更加更加更加努力哦</h4>
+        <h4 v-else>成绩等级为差，废物，别学了，玩去吧</h4>
+
+    </div>
+
+
+
+
+
+
+    <script>
+        Vue.config.productionTip = false
+        const mv = new Vue({
+            el: "#root",
+            data: {
+                flag: true,
+                score: '',
+            },
+            methods: {
+                transfer() {
+                    if (this.flag == false) {
+                        this.flag = true
+                    } else
+                        this.flag = false
+
+                }
+            },
+
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>
