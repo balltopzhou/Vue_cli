@@ -11,7 +11,7 @@
                         <span>{{ item.title }}</span>
                         <div class="bottom clearfix">
                             <time class="time">{{ currentDate }}</time>
-                            <el-button type="text" class="button">查看全文</el-button>
+                            <el-button type="text" class="button" @click.prevent="look">查看全文</el-button>
                         </div>
                     </div>
                 </el-card>
@@ -49,6 +49,15 @@ export default {
             
         };
     },
+    methods: {
+
+    look: function () {
+      this.$router.replace('/login');//页面跳转至登录页面
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  },
     components:{
     Header,Footer
   }
