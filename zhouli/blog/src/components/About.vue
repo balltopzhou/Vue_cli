@@ -1,31 +1,51 @@
 <template>
   <div class="about">
-    <el-page-header class="topbar" @click.prevent="goBack">
-    </el-page-header>
-    <div class="block">
-      <div class="top">
-        <h2>关于我的创作时间线</h2>
+
+    <vue-particles
+   color="#fff"
+  :particleOpacity="0.7" 
+  :particlesNumber="80"
+  shapeType="circle"
+  :particleSize="4"
+  linesColor="#fff"
+  :linesWidth="1"
+  :lineLinked="true"
+  :lineOpacity="0.8"
+  :linesDistance="150"
+  :moveSpeed="2"
+  :hoverEffect="true"
+  hoverMode="grab"
+  :clickEffect="true"
+  clickMode="push"
+  class="lizi"
+>
+</vue-particles> 
+    <router-view></router-view> 
+      <!-- 如果想做背景图片 可以给标签一个class 直接添加背景图 -->
+
+      <div class="block">
+        <div class="top">
+          <h2>关于我的创作时间线</h2>
+        </div>
+        <el-timeline>
+          <div v-for="item in cardlist" :key="item.id" :color="item.color">
+            <el-timeline-item placement="top" :timestamp="item.id" :color="item.color">
+              <el-card class="card">
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.info }}</p>
+              </el-card>
+            </el-timeline-item>
+          </div>
+
+          <div class="time">
+            <h2>今天也是努力创作的一天!</h2>
+            <el-calendar v-model="value">
+            </el-calendar>
+          </div>
+        </el-timeline>
       </div>
-      <el-timeline>
-        <div v-for="item in cardlist" :key="item.id" :color="item.color">
-          <el-timeline-item placement="top" :timestamp="item.id" :color="item.color">
-            <el-card class="card">
-              <h4>{{ item.title }}</h4>
-              <p>{{ item.info }}</p>
-            </el-card>
-          </el-timeline-item>
-        </div>
-
-        <div class="time">
-          <h2>今天也是努力创作的一天!</h2>
-          <el-calendar v-model="value">
-          </el-calendar>
-        </div>
-
-
-      </el-timeline>
-    </div>
-    <Footer></Footer>
+      <Footer></Footer>
+      
   </div>
 </template>
 
@@ -38,11 +58,11 @@ export default {
   data() {
     return {
       cardlist: [
-        { id: 1, title: '建立项目，开始创作', info: '完成于 2023/6/07 20:46', color: '#0bbd87' },
-        { id: 2, title: '登录注册页面及功能完成', info: '完成于 2023/6/12 22:46', color: '#0bbd87' },
-        { id: 3, title: '主页面设计编写完成', info: '完成于 2023/6/18 17:46', color: '#0bbd87' },
-        { id: 4, title: 'About页面编写完成', info: '完成于 2023/6/18 20:39', color: '#0bbd87' },
-        { id: 5, title: '建立项目，开始创作', info: '完成于 2023/6/07 20:46', color: '#0bbd87' },
+        { id: 1, title: '建立项目，开始创作', info: '完成于 2023/6/07 20:46', color: '#0083a5' },
+        { id: 2, title: '登录注册页面及功能完成', info: '完成于 2023/6/12 22:46', color: '#0083a5' },
+        { id: 3, title: '主页面设计编写完成', info: '完成于 2023/6/18 17:46', color: '#0083a5' },
+        { id: 4, title: 'About页面编写完成', info: '完成于 2023/6/18 20:39', color: '#0083a5' },
+        { id: 5, title: '建立项目，开始创作', info: '完成于 2023/6/07 20:46', color: '#0083a5' },
 
       ],
       value: new Date()
@@ -51,11 +71,6 @@ export default {
   components: {
     Footer
   },
-  methods: {
-      goBack() {
-        this.$router.replace('/Homepage');
-      }
-    }
 }
 </script>
 
@@ -63,16 +78,24 @@ export default {
 .about {
   margin: 0;
   padding: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: #f8e8bc;
+  background-image: url('../assets/About-block.png');
+
 }
-.topbar{
-  padding-left: 40px;
-  color: white;
-  font-weight: bolder;
+
+.lizi{
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  left:0;
+  top:0;
+  /* z-index: -1; */
+  /* background-image:radial-gradient(#002953, #041222); //添加渐变背景颜色 */
 }
+
 .top h2 {
   padding-bottom: 20PX;
   color: white;
@@ -99,6 +122,8 @@ export default {
 }
 
 .card:hover {
-  background-color: #fceeca;
+  background-color: rgba(51, 121, 253, 0.4);
+  color: white;
   transform: translate(0, -5px);
-}</style>
+}
+</style>

@@ -1,28 +1,6 @@
 <template>
   <div id="bg">
-    <div class="title">
-      <el-menu router :default-active="this.$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-        <el-menu-item index="/Indexpage">首页</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">博客</template>
-          <el-menu-item index="/All">所有</el-menu-item>
-          <el-menu-item index="2-1">VUE</el-menu-item>
-          <el-menu-item index="2-2">ELEMENT-UI</el-menu-item>
-          <el-menu-item index="2-3">NODE.JS</el-menu-item>
-          <el-submenu index="2-4">
-            <template slot="title">HTML</template>
-            <el-menu-item index="2-4-1">HTML3 </el-menu-item>
-            <el-menu-item index="2-4-2">HTML5</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-menu-item index="/Write">写博客</el-menu-item>
-        <el-menu-item index="/About">关于我</el-menu-item>
-        <div class="block">
-          <el-avatar :size="50" :src="circleUrl"></el-avatar>
-        </div>
-        <el-button type="danger" @click.prevent="logout">退出</el-button>
-      </el-menu>
-    </div>
+    <Header></Header>
     <el-row :gutter="20">
         <el-col :span="6">
           <div>
@@ -116,17 +94,12 @@
 
 <script>
 import Footer from '../components/Footer.vue'
+import Header from '../components/Header.vue'
 
 export default {
   name: 'Homepage',
   data() {
-    return {//获取用户信息到主页
-      sname: localStorage.getItem('name'),
-      smail: localStorage.getItem('mail'),
-      stel: localStorage.getItem('tel'),
-      isAuth: "",//是否保持登录状态
-      activeIndex: '1',
-      circleUrl: require("../assets/block.png"),//头像图片
+    return {
       imglist: [
         { id: 1, url: require("../assets/swiper/s-1.jpg") },
         { id: 2, url: require("../assets/swiper/s-2.jpg") },
@@ -141,19 +114,9 @@ export default {
       title: '用户数',
     };
   },
-  methods: {
-    //当点击退出按钮，将不保存登录状态
-    logout: function () {
-      this.isAuth = "false";//修改登录状态
-      localStorage.setItem('s', this.isAuth);
-      this.$router.replace('/login');//页面跳转至登录页面
-    },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    }
-  },
+
   components:{
-    Footer
+    Header,Footer
   }
 }
 </script>
@@ -166,35 +129,6 @@ export default {
   display: flex;
   float: right;
 }
-
-.title {
-  margin-left: 40px;
-}
-
-button {
-  display: flex;
-  float: right;
-  margin-right: 20px;
-  margin-top: 20px;
-}
-
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 14px;
-  opacity: 0.75;
-  line-height: 280px;
-  margin: 0;
-}
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
-}
-
-
 .section {
   box-align: center; 
   padding-top: 0;
