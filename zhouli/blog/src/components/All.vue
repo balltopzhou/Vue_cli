@@ -16,8 +16,9 @@
                     </div>
                 </el-card>
             </el-col>
-            
         </el-row>
+        <p style="color: rgb(0, 0, 0);margin-bottom: 20px;">没有你喜欢的内容吗，快来加入你的话题吧</p>
+        <el-button type="primary" class="jump" @click.prevent="add">添加博客</el-button>
     </div>
     <Footer></Footer>
 </div>
@@ -52,7 +53,10 @@ export default {
     methods: {
 
     look: function () {
-      this.$router.replace('/login');//页面跳转至登录页面
+      this.$router.replace('/Read');//页面跳转至登录页面
+    },
+    add: function () {
+      this.$router.replace('/Write');//页面跳转至登录页面
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -68,6 +72,7 @@ export default {
 <style scoped>
 .cationar{
     background: url("../assets/All-block.png");
+    margin-top: 20px;
 }
 .cationar h1{
     padding-top: 20px;
@@ -81,6 +86,11 @@ export default {
     margin-left: 10%;
 	/* transform: translate(-50%,-50%); */
     margin-bottom: 40px;
+    transition: all 0.5s;
+}
+.card:hover {
+  background-color: rgb(255, 255, 255);
+  transform: translate(0, -5px);
 }
 .time {
     font-size: 13px;
@@ -109,5 +119,8 @@ export default {
 
 .clearfix:after {
     clear: both
+}
+.jump{
+    margin-bottom: 20px;
 }
 </style>

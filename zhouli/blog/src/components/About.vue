@@ -22,7 +22,7 @@
 </vue-particles> 
     <router-view></router-view> 
       <!-- 如果想做背景图片 可以给标签一个class 直接添加背景图 -->
-
+      <Header style="margin: 0;"></Header>
       <div class="block">
         <div class="top">
           <h2>关于我的创作时间线</h2>
@@ -51,6 +51,7 @@
 
 
 <script>
+import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
@@ -69,7 +70,7 @@ export default {
     }
   },
   components: {
-    Footer
+    Header,Footer
   },
 }
 </script>

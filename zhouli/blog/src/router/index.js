@@ -8,6 +8,7 @@ import Indexpage from '../components/Indexpage'//首页
 import About from '../components/About'//关于我
 import Write from '../components/Write'//写博客
 import All from '../components/All'
+import Read from '../components/Read'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
   name: 'All',
   path: '/All',
   component: All
+},
+{
+  name: 'Read',
+  path: '/Read',
+  component: Read
 },
 {
   name: 'Write',
