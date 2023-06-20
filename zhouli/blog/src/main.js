@@ -8,7 +8,6 @@ import VueParticles from 'vue-particles'
 Vue.use(VueParticles)  //粒子特效
 Vue.use(ElementUI)   
 
-
 Vue.config.productionTip = false
 new Vue({
   render: h => h(App),

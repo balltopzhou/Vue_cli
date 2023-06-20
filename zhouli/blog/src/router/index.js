@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 import Homepage from '../components/Homepage' //主页
 import Login from "../components/Login" //登陆
 import Register from "../components/Register"; //注册
-import Indexpage from '../components/Indexpage'//首页
 import About from '../components/About'//关于我
 import Write from '../components/Write'//写博客
 import All from '../components/All'
@@ -26,11 +25,8 @@ const routes = [
     component: Homepage,
    
   },
-  {
-    name: 'Indexpage',
-    path: '/Indexpage',
-    component: Indexpage
-},
+
+
 {
   name: 'All',
   path: '/All',

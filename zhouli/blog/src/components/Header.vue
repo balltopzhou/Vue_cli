@@ -1,17 +1,16 @@
 <template>
     <div class="title">
         <el-menu router :default-active="this.$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="/Indexpage">首页</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">笔记</template>
                 <el-menu-item index="/All">所有</el-menu-item>
-                <el-menu-item index="2-1">VUE</el-menu-item>
-                <el-menu-item index="2-2">ELEMENT-UI</el-menu-item>
-                <el-menu-item index="2-3">NODE.JS</el-menu-item>
-                <el-submenu index="2-4">
+                <el-menu-item index="/Read">VUE</el-menu-item>
+                <el-menu-item index="/Read">ELEMENT-UI</el-menu-item>
+                <el-menu-item index="/Read">NODE.JS</el-menu-item>
+                <el-submenu index="/Read">
                     <template slot="title">HTML</template>
-                    <el-menu-item index="2-4-1">HTML3 </el-menu-item>
-                    <el-menu-item index="2-4-2">HTML5</el-menu-item>
+                    <el-menu-item index="/Read">HTML3 </el-menu-item>
+                    <el-menu-item index="/Read">HTML5</el-menu-item>
                 </el-submenu>
             </el-submenu>
             <el-menu-item index="/Write">写博客</el-menu-item>

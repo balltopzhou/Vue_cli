@@ -34,18 +34,18 @@ export default {
         return {
             currentDate: new Date(),
             titlelist:[
-                {id:1,title:'初始vue',url: require("../assets/swiper/s-1.jpg")},
-                {id:2,title:'初始vue',url: require("../assets/swiper/s-2.jpg")},
-                {id:3,title:'初始vue',url: require("../assets/swiper/s-3.jpg")},
-                {id:4,title:'初始vue',url: require("../assets/swiper/s-4.jpg")},
-                {id:5,title:'初始vue',url: require("../assets/swiper/s-5.jpg")},
-                {id:6,title:'初始vue',url: require("../assets/swiper/s-6.jpg")},
-                {id:1,title:'初始vue',url: require("../assets/swiper/s-1.jpg")},
-                {id:2,title:'初始vue',url: require("../assets/swiper/s-2.jpg")},
-                {id:3,title:'初始vue',url: require("../assets/swiper/s-3.jpg")},
-                {id:4,title:'初始vue',url: require("../assets/swiper/s-4.jpg")},
-                {id:5,title:'初始vue',url: require("../assets/swiper/s-5.jpg")},
-                {id:6,title:'初始vue',url: require("../assets/swiper/s-6.jpg")},
+                {id:1,title:'初步认识vue',url: require("../assets/swiper/s-1.jpg")},
+                {id:2,title:'什么是vuex',url: require("../assets/swiper/s-2.jpg")},
+                {id:3,title:'前端html的发展史',url: require("../assets/swiper/s-3.jpg")},
+                {id:4,title:'node.js的使用方法',url: require("../assets/swiper/s-4.jpg")},
+                {id:5,title:'js的多种用法',url: require("../assets/swiper/s-5.jpg")},
+                {id:6,title:'css的逐步发展',url: require("../assets/swiper/s-6.jpg")},
+                {id:1,title:'初步认识vue',url: require("../assets/swiper/s-1.jpg")},
+                {id:2,title:'什么是vuex',url: require("../assets/swiper/s-2.jpg")},
+                {id:3,title:'前端html的发展史',url: require("../assets/swiper/s-3.jpg")},
+                {id:4,title:'node.js的使用方法',url: require("../assets/swiper/s-4.jpg")},
+                {id:5,title:'js的多种用法',url: require("../assets/swiper/s-5.jpg")},
+                {id:6,title:'css的逐步发展',url: require("../assets/swiper/s-6.jpg")},
         ]
             
         };
@@ -72,7 +72,7 @@ export default {
 <style scoped>
 .cationar{
     background: url("../assets/All-block.png");
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .cationar h1{
     padding-top: 20px;
