@@ -25,8 +25,6 @@ const routes = [
     component: Homepage,
    
   },
-
-
 {
   name: 'All',
   path: '/All',

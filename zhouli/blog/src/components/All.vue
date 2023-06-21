@@ -40,12 +40,12 @@ export default {
                 {id:4,title:'node.js的使用方法',url: require("../assets/swiper/s-4.jpg")},
                 {id:5,title:'js的多种用法',url: require("../assets/swiper/s-5.jpg")},
                 {id:6,title:'css的逐步发展',url: require("../assets/swiper/s-6.jpg")},
-                {id:1,title:'初步认识vue',url: require("../assets/swiper/s-1.jpg")},
-                {id:2,title:'什么是vuex',url: require("../assets/swiper/s-2.jpg")},
-                {id:3,title:'前端html的发展史',url: require("../assets/swiper/s-3.jpg")},
-                {id:4,title:'node.js的使用方法',url: require("../assets/swiper/s-4.jpg")},
-                {id:5,title:'js的多种用法',url: require("../assets/swiper/s-5.jpg")},
-                {id:6,title:'css的逐步发展',url: require("../assets/swiper/s-6.jpg")},
+                {id:7,title:'初步认识vue',url: require("../assets/swiper/s-1.jpg")},
+                {id:8,title:'什么是vuex',url: require("../assets/swiper/s-2.jpg")},
+                {id:9,title:'前端html的发展史',url: require("../assets/swiper/s-3.jpg")},
+                {id:10,title:'node.js的使用方法',url: require("../assets/swiper/s-4.jpg")},
+                {id:11,title:'js的多种用法',url: require("../assets/swiper/s-5.jpg")},
+                {id:12,title:'css的逐步发展',url: require("../assets/swiper/s-6.jpg")},
         ]
             
         };
@@ -53,10 +53,10 @@ export default {
     methods: {
 
     look: function () {
-      this.$router.replace('/Read');//页面跳转至登录页面
+      this.$router.replace('/Read');//页面跳转至博客详情页面
     },
     add: function () {
-      this.$router.replace('/Write');//页面跳转至登录页面
+      this.$router.replace('/Write');//页面跳转至写博客页面
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
