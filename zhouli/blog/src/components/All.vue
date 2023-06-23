@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header></Header>
+        <Header style="margin: 0;"></Header>
     <div class="cationar">
         <h1>所有博客尽在此页</h1>
         <el-row class="cardlist">

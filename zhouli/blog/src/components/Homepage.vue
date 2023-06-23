@@ -1,6 +1,18 @@
 <template>
   <div id="bg">
-    <Header></Header>
+
+    <div id="thediv" ref="thediv" @mouseover="clearFdAd" @mouseout="starFdAd">
+      <div>
+        <h2>想要学习更多vue知识吗</h2>
+        <h3>快来siki学院一起探索吧</h3>
+      </div>
+      <span @click="close">X</span>
+    </div>
+
+
+
+    <Header style="margin: 0;"></Header>
+
     <el-row :gutter="20">
         <el-col :span="6">
           <div>
@@ -112,11 +124,79 @@ export default {
       value1: 456,
       value2: 232,
       title: '用户数',
+      xPos: 300,
+      yPos: 200,
+      step: 1,
+      delay: 8,
+      height: 0,
+      Hoffset: 0,
+      Woffset: 0,
+      yon: 0,
+      xon: 0,
+      pause: true
+
+
     };
   },
 
   components:{
     Header,Footer
+  },
+  mounted () {
+    interval = setInterval(this.changePos, 10)
+  },
+  methods: {
+    changePos () {
+      let width = document.documentElement.clientWidth
+      let height = document.documentElement.clientHeight
+      this.Hoffset = this.$refs.thediv.offsetHeight
+      this.Woffset = this.$refs.thediv.offsetWidth
+      this.$refs.thediv.style.left =
+        this.xPos +
+        document.body.scrollLeft +
+        document.documentElement.scrollLeft +
+        'px'
+      this.$refs.thediv.style.top =
+        this.yPos +
+        document.body.scrollTop +
+        document.documentElement.scrollTop +
+        'px'
+      if (this.yon) {
+        this.yPos = this.yPos + this.step
+      } else {
+        this.yPos = this.yPos - this.step
+      }
+      if (this.yPos < 0) {
+        this.yon = 1
+        this.yPos = 0
+      }
+      if (this.yPos >= height - this.Hoffset) {
+        this.yon = 0
+        this.yPos = height - this.Hoffset
+      }
+      if (this.xon) {
+        this.xPos = this.xPos + this.step
+      } else {
+        this.xPos = this.xPos - this.step
+      }
+      if (this.xPos < 0) {
+        this.xon = 1
+        this.xPos = 0
+      }
+      if (this.xPos >= width - this.Woffset) {
+        this.xon = 0
+        this.xPos = width - this.Woffset
+      }
+    },
+    clearFdAd () {
+      clearInterval(interval)
+    },
+    starFdAd () {
+      interval = setInterval(this.changePos, 10)
+    },
+    close(){
+      this.$refs.thediv.style.display='none'
+    }
   }
 }
 </script>
@@ -124,6 +204,11 @@ export default {
 
 //css
 <style scoped>
+#thediv{
+  color: white;
+  background-image: url('../assets/images/top-block.png');
+  background-size:100%;
+}
 .block {
   margin-top: 13px;
   display: flex;

@@ -63,8 +63,8 @@ export default {
         { id: 2, title: '登录注册页面及功能完成', info: '完成于 2023/6/12 22:46', color: '#0083a5' },
         { id: 3, title: '主页面设计编写完成', info: '完成于 2023/6/18 17:46', color: '#0083a5' },
         { id: 4, title: 'About页面编写完成', info: '完成于 2023/6/18 20:39', color: '#0083a5' },
-        { id: 5, title: '建立项目，开始创作', info: '完成于 2023/6/07 20:46', color: '#0083a5' },
-
+        { id: 5, title: 'All页面完成，进入博客详情页的编写', info: '完成于 2023/6/19 15:46', color: '#0083a5' },
+        { id: 6, title: 'Read页面完成，进入写博客页的编写', info: '完成于 2023/6/20 17:46', color: '#0083a5' },
       ],
       value: new Date()
     }
@@ -123,7 +123,7 @@ export default {
 }
 
 .card:hover {
-  background-color: rgba(51, 121, 253, 0.4);
+  background-color: rgba(51, 121, 253, 0.3);
   color: white;
   transform: translate(0, -5px);
 }

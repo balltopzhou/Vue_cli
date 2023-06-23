@@ -1,6 +1,10 @@
 <template>
     <div class="title">
         <el-menu router :default-active="this.$route.path" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-avatar :size="50" :src="BlogUrl" style="margin-top: 5px;margin-left: 10px; margin-right: 20px;
+    display: flex;
+    float: left;"></el-avatar>
+            <el-menu-item index="/Homepage">首页</el-menu-item>
             <el-submenu index="2">
                 <template slot="title">笔记</template>
                 <el-menu-item index="/All">所有</el-menu-item>
@@ -34,20 +38,21 @@ export default {
             stel: localStorage.getItem('tel'),
             isAuth: "",//是否保持登录状态
             activeIndex: '1',
+            BlogUrl:require("../assets/blog.png"),
             circleUrl: require("../assets/block.png"),//头像图片
         }
     },
     methods: {
-    //当点击退出按钮，将不保存登录状态
-    logout: function () {
-      this.isAuth = "false";//修改登录状态
-      localStorage.setItem('s', this.isAuth);
-      this.$router.replace('/login');//页面跳转至登录页面
+        //当点击退出按钮，将不保存登录状态
+        logout: function () {
+            this.isAuth = "false";//修改登录状态
+            localStorage.setItem('s', this.isAuth);
+            this.$router.replace('/login');//页面跳转至登录页面
+        },
+        handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        }
     },
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    }
-  },
 }
 </script>
 
@@ -89,19 +94,20 @@ button {
     margin-right: 20px;
     margin-top: 20px;
 }
+
 .section {
-  box-align: center; 
-  padding-top: 0;
-  padding-bottom: 0;
-  min-height: 37.5rem;
-  height: 80vh;
+    box-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 37.5rem;
+    height: 80vh;
 }
 
 header {
-  position: absolute;
-  margin-top: 200px;
-  margin-left: 80px;
-  width: 400px;
-  color: white;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 80px;
+    width: 400px;
+    color: white;
 }
 </style>
